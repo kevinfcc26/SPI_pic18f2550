@@ -7,23 +7,28 @@
  * Created on April 15, 2017, 5:59 PM
  */
 
+ /*
+  Este codigo esta modificao para que funcione en el pic18f2550
+ */
+
+
 #include "spi.h"
 
 void spiInit(Spi_Type sType, Spi_Data_Sample sDataSample, Spi_Clock_Idle sClockIdle, Spi_Transmit_Edge sTransmitEdge)
 {
-    TRISC5 = 0;
+    TRISC7 = 0;
     if(sType & 0b00000100) //If Slave Mode
     {
         SSPSTAT = sTransmitEdge;
-        TRISC3 = 1;
+        TRISB1 = 1;
     }
     else              //If Master Mode
     {
         SSPSTAT = sDataSample | sTransmitEdge;
-        TRISC3 = 0;
+        TRISB1 = 0;
     }
     
-    SSPCON = sType | sClockIdle;
+    SSPCON1 = sType | sClockIdle;
 }
 
 static void spiReceiveWait()

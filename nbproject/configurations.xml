@@ -40,7 +40,6 @@
       <compileType>
         <linkerTool>
           <linkerLibItems>
-            <linkerLibFileItem>spi.h</linkerLibFileItem>
           </linkerLibItems>
         </linkerTool>
         <archiverTool>

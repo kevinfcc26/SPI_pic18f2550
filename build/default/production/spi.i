@@ -7,7 +7,7 @@
 # 1 "/opt/microchip/xc8/v2.10/pic/include/language_support.h" 1 3
 # 2 "<built-in>" 2
 # 1 "spi.c" 2
-# 10 "spi.c"
+# 15 "spi.c"
 # 1 "./spi.h" 1
 # 13 "./spi.h"
 # 1 "/opt/microchip/xc8/v2.10/pic/include/xc.h" 1 3
@@ -5040,24 +5040,24 @@ void spiInit(Spi_Type, Spi_Data_Sample, Spi_Clock_Idle, Spi_Transmit_Edge);
 void spiWrite(char);
 unsigned spiDataReady();
 char spiRead();
-# 10 "spi.c" 2
+# 15 "spi.c" 2
 
 
 void spiInit(Spi_Type sType, Spi_Data_Sample sDataSample, Spi_Clock_Idle sClockIdle, Spi_Transmit_Edge sTransmitEdge)
 {
-    TRISC5 = 0;
+    TRISC7 = 0;
     if(sType & 0b00000100)
     {
         SSPSTAT = sTransmitEdge;
-        TRISC3 = 1;
+        TRISB1 = 1;
     }
     else
     {
         SSPSTAT = sDataSample | sTransmitEdge;
-        TRISC3 = 0;
+        TRISB1 = 0;
     }
 
-    SSPCON = sType | sClockIdle;
+    SSPCON1 = sType | sClockIdle;
 }
 
 static void spiReceiveWait()
